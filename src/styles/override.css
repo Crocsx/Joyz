@@ -1,0 +1,13 @@
+.ant-picker-range{
+    background: #cccccc;
+    border: none;
+    color: black;
+}
+
+.ant-picker-input > input{
+    color: black; 
+}
+
+.ant-picker-input > input::placeholder {
+    color:black;
+}
