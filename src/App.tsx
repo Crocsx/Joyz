@@ -5,7 +5,10 @@ import { createBrowserHistory } from 'history';
 import './App.css';
 import 'antd/dist/antd.css';
 import 'styles/override.css';
+
 import BrowsingRouter from 'components/browsingRouter/browsingRouter';
+
+import 'interceptors/axios.interceptor';
 
 function App(): JSX.Element {
   const history = createBrowserHistory();

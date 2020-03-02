@@ -13,8 +13,10 @@
     "axios-observable": "^1.1.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "redux": "^4.0.5",
     "typescript": "^3.8.3"
   },
   "scripts": {
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
+    "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.3"
   }
 }
