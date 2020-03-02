@@ -1,7 +1,8 @@
 import Axios from  'axios-observable';
+import store from 'store/store'
 
 Axios.interceptors.request.use(request => {
-    const authKey = localStorage.getItem("auth_key");
+    const authKey = store.getState().authStore.token;
     if(authKey)
     {
         request.headers.common = {...request.headers.common, ...{

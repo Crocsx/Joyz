@@ -7,9 +7,17 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import styles from './login.module.css'
 import { AntdAlert, AlertType } from 'types/default.t';
+import { login, loginPayload } from 'store/auth/auth.actions';
+import { connect } from 'react-redux';
+import { getToken } from 'store/auth/auth.selector';
 
-const Login = (props: RouteComponentProps): JSX.Element => {
-  const authKey = localStorage.getItem("auth_key");
+interface LoginProps extends RouteComponentProps{
+  token: string;
+  login: (payload: loginPayload) => void;
+}
+
+
+const Login = (props: LoginProps): JSX.Element => {
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
   const [getAlert, setAlert] = useState({
@@ -18,7 +26,7 @@ const Login = (props: RouteComponentProps): JSX.Element => {
     display: false
   } as AntdAlert);
 
-  const { history }: RouteComponentProps = props;
+  const { history, token, login }: LoginProps = props;
 
   const requestLogin = (): void => {
     Axios.post(`${Constant.API_PATH}login/`, null, {
@@ -27,7 +35,7 @@ const Login = (props: RouteComponentProps): JSX.Element => {
         password: getPassword
       }
     }).subscribe((res: AxiosResponse<{user_id: string; token: string; email: string }>) => {
-      localStorage.setItem('auth_key', res.data.token);
+      login({token: res.data.token});
       history.push('/');
     }, (err: AxiosResponse<{detail: string}>) => {
       setAlert({
@@ -40,9 +48,9 @@ const Login = (props: RouteComponentProps): JSX.Element => {
 
   return (
     <div>
-      {authKey && <Redirect to={"/"}></Redirect>}
+      {token !== '' && <Redirect to={"/"}></Redirect>}
       {
-        <Row justify='center' align='middle' style={{ height: '100vh' }}>
+        <Row justify='center' align='middle' style={{ height: '100%' }}>
           <Row justify='center'>
             <Card title={"Login"} className={styles['Login-form']}>
               {getAlert.display && <Alert message={getAlert.message} type={getAlert.type}></Alert>}
@@ -78,4 +86,14 @@ const Login = (props: RouteComponentProps): JSX.Element => {
   )
 }
 
-export default withRouter(Login);
+const mapStateToProps = state => {
+  return {
+    token: getToken(state)
+  }
+}
+
+
+export default withRouter(connect(
+  mapStateToProps,
+  { login }
+)(Login));

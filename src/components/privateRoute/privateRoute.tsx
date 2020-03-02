@@ -4,9 +4,12 @@ import {
   Redirect,
   RouteProps
 } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
+import { getToken } from 'store/auth/auth.selector';
 
 const PrivateRoute = (props: RouteProps): JSX.Element => {
-  const authKey = localStorage.getItem("auth_key");
+  const authKey = useSelector((state: RootState) => getToken(state));
   const {component: Component, ...rest}: any = props;
   return (
     <Route
