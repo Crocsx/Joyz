@@ -16,10 +16,10 @@ import Login from 'components/login/login';
 const BrowsingRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
-        <Switch>
-            <PrivateRoute exact path="/" component={CategoryLister} />
-            <Route path="/login" component={Login} />
-        </Switch>
+      <Switch>
+        <PrivateRoute exact path="/" component={CategoryLister} />
+        <Route path="/login" component={Login} />
+      </Switch>
     </BrowserRouter>
   )
 }

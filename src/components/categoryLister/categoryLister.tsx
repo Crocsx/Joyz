@@ -39,7 +39,7 @@ export class CategoryLister extends React.Component<CategoryListerProps, Categor
       <Spin spinning={this.state.loading}>
         <CategoryCreator></CategoryCreator>
         <div>
-          {this.props.categories.map(cat => {
+          {this.props.categories.sort((a,b) => (a.id < b.id ? 1 : -1)).map(cat => {
             return <CategoryCard category={cat} key={cat.id} ></CategoryCard>
           })}
         </div>

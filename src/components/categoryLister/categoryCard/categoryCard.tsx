@@ -9,9 +9,9 @@ import Axios from 'axios-observable';
 import Constant from 'App.constant';
 
 interface CategoryCardProps {
-    category: Category;
-    deleteCategory: (payload: deleteCategoryPayload) => void;
-    updateCategory: (payload: updateCategoryPayload) => void;
+  category: Category;
+  deleteCategory: (payload: deleteCategoryPayload) => void;
+  updateCategory: (payload: updateCategoryPayload) => void;
 }
 
 const CategoryCard = (props: CategoryCardProps): JSX.Element => {

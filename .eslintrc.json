@@ -33,11 +33,11 @@
       }
     },
     "rules": {
+      "react/prop-types": 0,
       "no-trailing-spaces": 2,
       "@typescript-eslint/camelcase": 0,
       "@typescript-eslint/class-name-casing" : 0,
-      "no-non-null-assertion": 0,
-      "react/prop-types": [2, { "ignore": ["children"] }]
+      "no-non-null-assertion": 0
     },
     "parser": "@typescript-eslint/parser"
   }
