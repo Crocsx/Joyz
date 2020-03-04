@@ -30,14 +30,26 @@ const CategoryCreator = (props: CategoryCreatorProps): JSX.Element => {
     <Spin spinning={getLoading}>
       <p>Create New Category :</p>
       <Form colon={false} onFinish={(): void => requestAddCategory()}>
-        <Form.Item label=' ' labelCol={{span: 1}} wrapperCol={{span: 23}} hasFeedback>
+        <Form.Item
+          name={['name']}
+          rules={[{ required: true, message: 'Please insert a name' }]}
+          label=' '
+          labelCol={{span: 1}}
+          wrapperCol={{span: 23}}
+          hasFeedback>
           <Input
             onChange={(e): void => setCategoryName(e.target.value)}
             type='text'
             placeholder={'name'}
           />
         </Form.Item>
-        <Form.Item label=' ' labelCol={{span: 1}} wrapperCol={{span: 23}} hasFeedback>
+        <Form.Item
+          name={['description']}
+          rules={[{ required: true, message: 'Please insert a description' }]}
+          label=' '
+          labelCol={{span: 1}}
+          wrapperCol={{span: 23}}
+          hasFeedback>
           <Input
             onChange={(e): void => setCategoryDescription(e.target.value)}
             type='text'

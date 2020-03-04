@@ -55,14 +55,26 @@ const Login = (props: LoginProps): JSX.Element => {
             <Card title={"Login"} className={styles['Login-form']}>
               {getAlert.display && <Alert message={getAlert.message} type={getAlert.type}></Alert>}
               <Form colon={false} onFinish={(): void => requestLogin()}>
-                <Form.Item label=' ' labelCol={{span: 1}} wrapperCol={{span: 23}} hasFeedback>
+                <Form.Item
+                  name={['username']}
+                  rules={[{ required: true, message: 'Please insert a username' }]}
+                  label=' '
+                  labelCol={{span: 1}}
+                  wrapperCol={{span: 23}}
+                  hasFeedback>
                   <Input
                     onChange={(e): void => setUsername(e.target.value)}
                     type='text'
                     placeholder={'username'}
                   />
                 </Form.Item>
-                <Form.Item label=' ' labelCol={{span: 1}} wrapperCol={{span: 23}} hasFeedback>
+                <Form.Item
+                  name={['password']}
+                  rules={[{ required: true, message: 'Please insert a password' }]}
+                  label=' '
+                  labelCol={{span: 1}}
+                  wrapperCol={{span: 23}}
+                  hasFeedback>
                   <Input
                     onChange={(e): void => setPassword(e.target.value)}
                     type='password'

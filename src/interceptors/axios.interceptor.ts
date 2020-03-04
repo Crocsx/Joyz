@@ -1,5 +1,6 @@
 import Axios from  'axios-observable';
 import store from 'store/store'
+import { logout } from 'store/auth/auth.actions';
 
 Axios.interceptors.request.use(request => {
     const authKey = store.getState().authStore.token;
@@ -23,7 +24,7 @@ Axios.interceptors.response.use(
             {
                 case 401:
                     if(!window.location.pathname.includes('login')){
-                        localStorage.setItem("auth_key", "");
+                        store.dispatch(logout())
                         window.location.pathname = '/login';
                     }
                 break;

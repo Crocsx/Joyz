@@ -43,7 +43,9 @@ export default function(state = initialState, action): CategoryStoreState {
                 ...changes
             })
         }
-        return state;
+        return {
+          ...state
+        };
     }
     default:
       return state;

@@ -34,6 +34,10 @@ export class CategoryLister extends React.Component<CategoryListerProps, Categor
     })
   }
 
+  componentDidUpdate(){
+    console.log(this.props)
+  }
+
   render(): JSX.Element {
     return (
       <Spin spinning={this.state.loading}>

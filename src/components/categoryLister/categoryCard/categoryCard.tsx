@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Input, Spin } from 'antd';
+import { Card, Input, Spin, Tooltip, Button } from 'antd';
 import { Category } from 'types/default.t';
 import { DeleteOutlined, EditOutlined, SaveOutlined, StopOutlined } from '@ant-design/icons';
 import { deleteCategory, updateCategory, deleteCategoryPayload, updateCategoryPayload } from "store/category/category.actions";
@@ -40,14 +40,24 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
     })
   }
 
+  const cancelChanges = (): void => {
+    setName(props.category.name);
+    setDescription(props.category.description);
+    setEditMode(false)
+  }
+
   const getCard = (): JSX.Element => {
     return(
       <Card title={
         <div style={{display: "inline-flex", width: "100%"}}>
           <div style={{width: "90%"}} >{getName}</div>
-          <div style={{width: "10%"}}>
-            <EditOutlined style={{ margin: "0 15%"}} onClick={(): void => setEditMode(true)}/>
-            <DeleteOutlined style={{ margin: "0 15%"}} onClick={(): void => deleteCard({id: category.id})}/>
+          <div style={{width: "10%", display: 'flex', justifyContent: 'space-evenly'}}>
+            <Tooltip title="Edit category">
+              <EditOutlined onClick={(): void => setEditMode(true)}/>
+            </Tooltip>
+            <Tooltip title="Delete category">
+              <DeleteOutlined onClick={(): void => deleteCard({id: category.id})}/>
+            </Tooltip>
           </div>
         </div>
       }>
@@ -61,9 +71,22 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
       <Card title={
         <div style={{display: "inline-flex", width: "100%"}}>
           <Input style={{width: "90%"}} value={getName} onChange={(e): void => setName(e.target.value)}></Input>
-          <div style={{width: "10%"}}>
-            <SaveOutlined style={{ margin: "0 15%"}} onClick={(): void => updateCard({id: category.id, changes: {name: getName, description: getDescription}})}/>
-            <StopOutlined style={{ margin: "0 15%"}} onClick={(): void => setEditMode(false)}/>
+          <div style={{width: "10%", display: 'flex', justifyContent: 'space-evenly'}}>
+              <Tooltip title="Save changes">
+                <Button
+                  icon={<SaveOutlined />}
+                  style={{ margin: "0 15%"}}
+                  disabled={getName === '' || getDescription === ''}
+                  onClick={(): void => updateCard({id: category.id, changes: {name: getName, description: getDescription}})}>
+                </Button>
+              </Tooltip>
+              <Tooltip title="Cancel changes">
+                <Button
+                  icon={<StopOutlined />}
+                  style={{ margin: "0 15%"}}
+                  onClick={(): void => cancelChanges()}>
+                </Button>
+              </Tooltip>
           </div>
         </div>
       }>

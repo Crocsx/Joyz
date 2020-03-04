@@ -10,9 +10,16 @@ import BrowsingRouter from 'components/browsingRouter/browsingRouter';
 
 import 'interceptors/axios.interceptor';
 import Header from 'components/header/header';
+import { useDispatch } from 'react-redux';
+import { login } from 'store/auth/auth.actions';
 
 function App(): JSX.Element {
   const history = createBrowserHistory();
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch();
+  if(token) {
+    dispatch(login({token}));
+  }
   return (
     <div className="App">
       <section className="App">
